@@ -13,22 +13,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  updateAt  DateTime?
-  Client    barbershop[]
-  email     String
-  hash      String
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+
+  email String
+  hash  String
 
   firstName String?
   lastName  String?
 }
 
 model barbershop {
-  id        Int       @unique @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updateAt  DateTime?
-  clientId  String
-  Client    user      @relation(fields: [clientId], references: [id])
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updateAt   DateTime @updatedAt
+  title      String
+  descripion String?
 }
